@@ -11,15 +11,30 @@ divElementContainer.insertAdjacentHTML("beforeend", createMarkup());
 
 divElementContainer.addEventListener("click", foo);
 
-function foo(event) {
-  event.preventDefault();
-  console.log(event.target);
-  if (event.target.classList !== ".gallery__item") {
+function foo(evt) {
+  evt.preventDefault();
+  if (!evt.target.classList.contains("gallery__image")) {
     return;
   }
-  const link = event.original;
-  console.log(event);
+  console.log(evt.target);
+  basicLightbox
+    .create(
+      `
+  		<img width="1400" height="900" src="${evt.target("#data-source")}">
+  	`
+    )
+    .show();
 }
+
+// document.querySelector("button.image").onclick = () => {
+//   basicLightbox
+//     .create(
+//       `
+// 		<img width="1400" height="900" src="https://placehold.it/1400x900">
+// 	`
+//     )
+//     .show();
+// };
 
 // создание разметки
 function createMarkup() {
