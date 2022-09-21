@@ -3,9 +3,25 @@ import { galleryItems } from "./gallery-items.js";
 
 console.log(galleryItems);
 
+// получение ссылки на контейнер куда будет добавлятся разметка
 const divElementContainer = document.querySelector(".gallery");
+
+// добавление разметки на страницу
 divElementContainer.insertAdjacentHTML("beforeend", createMarkup());
 
+divElementContainer.addEventListener("click", foo);
+
+function foo(event) {
+  event.preventDefault();
+  console.log(event.target);
+  if (event.target.classList !== ".gallery__item") {
+    return;
+  }
+  const link = event.original;
+  console.log(event);
+}
+
+// создание разметки
 function createMarkup() {
   const markup = [];
   for (const galleryItem of galleryItems) {
