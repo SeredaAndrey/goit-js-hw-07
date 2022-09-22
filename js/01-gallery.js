@@ -1,40 +1,26 @@
 import { galleryItems } from "./gallery-items.js";
-// Change code below this line
 
 console.log(galleryItems);
 
-// получение ссылки на контейнер куда будет добавлятся разметка
-const divElementContainer = document.querySelector(".gallery");
+const divElementContainer = document.querySelector(".gallery"); // получение ссылки на контейнер куда будет добавлятся разметка
 
-// добавление разметки на страницу
-divElementContainer.insertAdjacentHTML("beforeend", createMarkup());
+divElementContainer.insertAdjacentHTML("beforeend", createMarkup()); // добавление разметки на страницу
 
-divElementContainer.addEventListener("click", foo);
+divElementContainer.addEventListener("click", foo); // добавление слушателя событий на клик по картинке с запуском функции foo()
 
 function foo(evt) {
-  evt.preventDefault();
-  if (!evt.target.classList.contains("gallery__image")) {
+  evt.preventDefault(); // удаление перехода по умолчанию по ссылке
+  if (!evt.target.dataset.source) {
     return;
   }
-  console.log(evt.target);
   basicLightbox
     .create(
       `
-  		<img width="1400" height="900" src="${evt.target("#data-source")}">
+  		<img width="1400" height="900" src="${evt.target.dataset.source}">
   	`
     )
     .show();
 }
-
-// document.querySelector("button.image").onclick = () => {
-//   basicLightbox
-//     .create(
-//       `
-// 		<img width="1400" height="900" src="https://placehold.it/1400x900">
-// 	`
-//     )
-//     .show();
-// };
 
 // создание разметки
 function createMarkup() {
